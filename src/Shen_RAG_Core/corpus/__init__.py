@@ -1,1 +1,0 @@
-"""Corpus pre-indexing package."""
