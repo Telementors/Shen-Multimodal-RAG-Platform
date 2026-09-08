@@ -74,9 +74,6 @@ Shen solves this by keeping **three separate indices** and using an **LLM router
 ```
 <img width="802" height="2242" alt="Shen" src="https://github.com/user-attachments/assets/d6ce12d5-7003-40e0-991b-ad7adf574700" />
 
-
-A full architecture document with diagrams and step-by-step workflow explanations is included at [`docs/Multimodal_RAG_Architecture.pdf`](./docs/Multimodal_RAG_Architecture.pdf).
-
 ---
 
 ## How It Works
