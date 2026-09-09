@@ -6,17 +6,9 @@
 
 | Tool | Purpose | Extent of Use |
 |---|---|---|
-| GitHub Copilot | Code completion and suggestions | Used for boilerplate code generation and code suggestions during development |
 | Claude (Anthropic) | Architecture design, debugging, code review | Used for discussing design decisions, debugging complex issues, and reviewing code quality |
 | ChatGPT (OpenAI) | Research and documentation | Used for researching best practices and generating initial documentation drafts |
 | Google Gemini / Antigravity IDE | Code development, debugging, documentation | Used for code editing, project structure refinement, and documentation updates |
-
-### AI-Generated Code
-
-- AI tools were used as assistants during the development process
-- All AI-generated code was reviewed, tested, and modified as needed
-- The core architecture and design decisions were made by the developer
-- AI suggestions were critically evaluated before incorporation
 
 ### AI as Part of the Product
 
