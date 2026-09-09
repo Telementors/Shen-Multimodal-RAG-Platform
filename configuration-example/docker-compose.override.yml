@@ -1,0 +1,74 @@
+# =============================================================================
+# Shen Multimodal RAG — Docker Compose Override (Example)
+# =============================================================================
+# This file demonstrates common overrides for development or production.
+# Docker Compose automatically merges docker-compose.override.yml with
+# docker-compose.yml when both exist in the same directory.
+#
+# Usage:
+#   cp docker-compose.override.yml ../src/docker-compose.override.yml
+#   # Edit as needed, then:
+#   docker compose up --build
+#
+# To use a custom override file name instead:
+#   docker compose -f docker-compose.yml -f my-overrides.yml up --build
+# =============================================================================
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # Example: Custom PostgreSQL password and port
+  # ---------------------------------------------------------------------------
+  postgres:
+    environment:
+      POSTGRES_PASSWORD: my-secure-password-here
+    ports:
+      - "5433:5432"     # Map to port 5433 if 5432 is already in use
+
+  # ---------------------------------------------------------------------------
+  # Example: Enable GPU acceleration for Ollama (NVIDIA)
+  # ---------------------------------------------------------------------------
+  # Uncomment the 'deploy' section below to use GPU for faster inference.
+  # Requires: nvidia-container-toolkit installed on the host.
+  ollama:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    environment:
+      OLLAMA_NUM_PARALLEL: "2"         # Max parallel requests
+      OLLAMA_MAX_LOADED_MODELS: "2"    # Max models in memory
+
+  # ---------------------------------------------------------------------------
+  # Example: Backend with custom CORS and Langfuse tracing
+  # ---------------------------------------------------------------------------
+  backend:
+    environment:
+      # Update DATABASE_URL password to match postgres override
+      DATABASE_URL: postgresql://postgres:my-secure-password-here@postgres:5432/multimodal_rag
+
+      # Add your production frontend URL to CORS
+      CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000,https://shen.yourdomain.com
+
+      # Enable Langfuse observability tracing
+      LANGFUSE_PUBLIC_KEY: pk-lf-your-public-key-here
+      LANGFUSE_SECRET_KEY: sk-lf-your-secret-key-here
+      LANGFUSE_HOST: https://cloud.langfuse.com
+
+      # Disable corpus re-indexing on restart (for production)
+      CORPUS_CLEAN_ON_START: "false"
+
+  # ---------------------------------------------------------------------------
+  # Example: Frontend with custom API URL (e.g., production domain)
+  # ---------------------------------------------------------------------------
+  frontend:
+    build:
+      args:
+        NEXT_PUBLIC_API_URL: https://api.yourdomain.com
+    environment:
+      NEXT_PUBLIC_API_URL: https://api.yourdomain.com
+    ports:
+      - "3001:3000"    # Map to port 3001 if 3000 is already in use
