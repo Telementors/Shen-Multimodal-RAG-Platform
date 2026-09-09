@@ -523,15 +523,6 @@ For detailed rationale and trade-offs, see [`docs/decisions.md`](./docs/decision
 | **Image Understanding** | Image chunks rely on LLM vision descriptions; complex diagrams with minimal text may not be well-indexed |
 | **Local LLM Quality** | Ollama/llama3.2 produces lower quality answers than GPT-4o-mini; trade-off for zero cost |
 
-### Planned Improvements
-
-- [ ] Support for additional document formats (DOCX, PPTX)
-- [ ] Vision model integration for direct image understanding
-- [ ] Query result caching
-- [ ] Parallel hybrid retrieval
-- [ ] Multilingual embedding support
-- [ ] Streaming answer generation
-
 For the full limitations document, see [`docs/limitations.md`](./docs/limitations.md).
 
 ---
